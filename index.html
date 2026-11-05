@@ -1,0 +1,68 @@
+let reactionReady=false;
+let reactionStart=0;
+let reactionTimer=null;
+
+function reactionGame(){
+
+document.getElementById("game").style.display="block";
+
+let box=document.getElementById("reactionBox");
+
+box.style.background="#9b2226";
+box.textContent="🔴 WAIT...";
+
+document.getElementById("reactionText").textContent=
+"Wait for green!";
+
+document.getElementById("reactionResult").textContent="";
+
+reactionReady=false;
+
+clearTimeout(reactionTimer);
+
+reactionTimer=setTimeout(function(){
+
+reactionReady=true;
+
+reactionStart=performance.now();
+
+box.style.background="#168a3a";
+
+box.textContent="🟢 CLICK!";
+
+document.getElementById("reactionText").textContent=
+"CLICK NOW!";
+
+},Math.floor(Math.random()*3000)+1500);
+
+}
+
+function reactionClick(){
+
+if(!reactionReady){
+
+return;
+
+}
+
+let time=Math.round(
+performance.now()-reactionStart
+);
+
+reactionReady=false;
+
+let box=document.getElementById("reactionBox");
+
+box.style.background="#33334a";
+
+box.textContent=time+" ms ⚡";
+
+document.getElementById("reactionText").textContent=
+"Nice!";
+
+document.getElementById("reactionResult").textContent=
+"Press PLAY to try again.";
+
+}
+
+/* =========================
